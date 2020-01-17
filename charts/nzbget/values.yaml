@@ -96,6 +96,15 @@ persistence:
     # subPath: some-subpath
     accessMode: ReadWriteOnce
     size: 10Gi
+  additional_volumes: []
+  ## Add additional volumes (such as NFS volumes) that will be mounted in the
+  ## pod. This is useful if you wish to use different paths with categories
+  ## Volume will me mounted as /{name}
+  # - name: video
+  #   nfs:
+  #     server: 192.168.0.1
+  #     path: /some/path/to/video
+
 
 
 resources: {}

@@ -62,6 +62,10 @@ spec:
             {{- if .Values.persistence.downloads.subPath }}
               subPath: {{ .Values.persistence.downloads.subPath }}
             {{ end }}
+            {{-  range .Values.persistence.additional_volumes }}
+            - mountPath: /{{ .name }}
+              name: {{ .name }}
+            {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
       volumes:
@@ -79,6 +83,9 @@ spec:
       {{- else }}
         emptyDir: {}
       {{ end }}
+     {{- if .Values.persistence.additional_volumes }}
+       {{- toYaml .Values.persistence.additional_volumes | nindent 6 }}
+     {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
